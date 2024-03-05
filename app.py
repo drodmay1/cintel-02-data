@@ -6,7 +6,7 @@ import palmerpenguins  # This package provides the Palmer Penguins dataset
 # Use the built-in function to load the Palmer Penguins dataset
 penguins_df = palmerpenguins.load_penguins()
 
-ui.page_opts(title="DavidRm", fillable=True)
+ui.page_opts(title="DavidRm Penguin", fillable=True)
 with ui.layout_columns():
 
     @render_plotly
