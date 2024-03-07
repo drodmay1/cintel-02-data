@@ -41,7 +41,31 @@ with ui.sidebar(open="open"):
          target="_blank",
          )
 
-# Creates a Plotty Scatterplot showing all species
+# Creates a Plotly Histogram showing all species
+
+with ui.card(full_screen=True):
+    ui.card_header("Plotly Histogram")
+    
+    @render_plotly
+    def plotly_histogram():
+        return px.histogram(
+            penguins_df, x=input.selected_attribute(), nbins=input.plotly_bin_count()
+        )
+
+# Creates a Seaborn Histogram showing all species
+
+with ui.card(full_screen=True):
+    ui.card_header("Seaborn Histogram")
+
+    @render.plot(alt="Seaborn Histogram")
+    def seaborn_histogram():
+        histplot = sns.histplot(data=penguins_df, x="body_mass_g", bins=input.seaborn_bin_count())
+        histplot.set_title("Palmer Penguins")
+        histplot.set_xlabel("Mass")
+        histplot.set_ylabel("Count")
+        return histplot
+
+# Creates a Plotly Scatterplot showing all species
 
 with ui.card(full_screen=True):
     ui.card_header("Plotly Scatterplot: Species")
@@ -59,4 +83,3 @@ with ui.card(full_screen=True):
             },
             size_max=8, 
         )
-    
