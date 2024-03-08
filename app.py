@@ -41,6 +41,16 @@ with ui.sidebar(open="open"):
          target="_blank",
          )
 
+# Creates a DataTable showing all data
+with ui.layout_columns(col_widths=(4, 8)):        
+    with ui.card():
+        "DataTable"
+
+    @render.data_frame
+    def render_penguins_table():
+        return penguins_df
+       
+
 # Creates a Plotly Histogram showing all species
 
 with ui.card(full_screen=True):
