@@ -42,14 +42,34 @@ with ui.sidebar(open="open"):
          )
 
 # Creates a DataTable showing all data
+
 with ui.layout_columns(col_widths=(4, 8)):        
     with ui.card():
         "DataTable"
 
+    ui.h2("Penguins Table")
+
     @render.data_frame
     def render_penguins_table():
         return penguins_df
-       
+
+# Creates a DataGrid showing all data
+
+with ui.layout_columns(col_widths=(4, 8)):        
+    with ui.card():
+        "DataGrid"
+
+    ui.h2("Penguins DataGrid")
+
+@render.ui()
+def rows():
+    rows = input.penguins_df_selected_rows()  
+    selected = ", ".join(str(i) for i in sorted(rows)) if rows else "None"
+    return f"Rows selected: {selected}"
+
+@render.data_frame
+def penguins_data():
+    return render.DataGrid(penguins_df, row_selection_mode="multiple") 
 
 # Creates a Plotly Histogram showing all species
 
