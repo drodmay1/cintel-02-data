@@ -14,7 +14,6 @@ ui.page_opts(title="DavidRm Penguin", fillable=True)
 
 # creates sidebar for user interaction
 with ui.sidebar(open="open"):
-    
     ui.h2("Sidebar")
     
     # Creates a dropdown input to choose a column 
@@ -28,7 +27,7 @@ with ui.sidebar(open="open"):
     ui.input_numeric("plotly_bin_count", "Number of Plotly bins", 30)
     
     # Creates a slider input for the number of Seaborn bins
-    ui.input_slider("seaborn_bin_count", "Number of Seaborn bins", 1, 100, 20)
+    ui.input_slider("seaborn_bin_count", "Number of Seaborn bins", 1, 40, 20)
 
     # Adds a horizontal rule to the sidebar
     ui.hr()
@@ -51,28 +50,21 @@ with ui.sidebar(open="open"):
 
 # Creates a DataTable showing all data
 
-with ui.layout_columns(col_widths=(4, 8)):        
-    with ui.card():
-        "DataTable"
+with ui.layout_columns():        
+    with ui.card(full_screen=True):
+        ui.h2("Penguins DataTable")
 
-    ui.h2("Penguins Table")
-
-    @render.data_frame
-    def render_penguins_table():
-        return penguins_df
+        @render.data_frame
+        def render_penguins_table():
+            return render.DataTable(penguins_df)
 
 # Creates a DataGrid showing all data
+    with ui.card(full_screen=True):
+        ui.h2("Penguins DataGrid")
 
-with ui.layout_columns(col_widths=(4, 8)):        
-    with ui.card():
-        "DataGrid"
-
-    ui.h2("Penguins DataGrid")
-
-
-@render.data_frame
-def penguins_data():
-    return render.DataGrid(penguins_df, row_selection_mode="multiple") 
+        @render.data_frame
+        def penguins_datagrid():
+            return render.DataGrid(penguins_df)
 
 # Creates a Plotly Histogram showing all species
 
