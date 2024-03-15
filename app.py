@@ -105,6 +105,24 @@ with ui.card(full_screen=True):
             labels={
                 "bill_length_mm": "Bill Length (mm)",
                 "body_mass_g": "Body Mass (g)",
-            },
-            size_max=8, 
+            }, 
         )
+
+# Creates a Plotly Boxplot showing all species
+with ui.card(full_screen=True):
+    ui.card_header("Plotly Boxplot: Species")
+
+    @render_plotly
+    def plotly_boxplot():
+        return px.box(
+            penguins_df,
+            x="species",
+            y=input.selected_attribute(),
+            title="Penguins Boxplot",
+            labels={
+                "species": "Species",
+                input.selected_attribute(): input.selected_attribute().replace("_", " ").title(),
+            },
+        )
+        
+
